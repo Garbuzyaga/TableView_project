@@ -17,7 +17,8 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 private:
     QVector<QVector<QString>> cellsData_;  //holds text entered into QTableView
+    bool isCorrect();
 signals:
-    void editCompleted(const QString &);
+    void checkCell(bool);
 };
 #endif // MODEL_H
