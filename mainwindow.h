@@ -1,14 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QWidget>
+#include <QTableView>
+#include <QLabel>
+#include <QHBoxLayout>
 #include "model.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
-
-class MainWindow : public QMainWindow
+class MainWindow : public QWidget
 {
     Q_OBJECT
 
@@ -21,6 +20,8 @@ public slots:
 private:
     bool isValid(const QString& string);
     Model *model;
-    Ui::MainWindow *ui;
+    QTableView *view;
+    QLabel *label;
+    QHBoxLayout *lay;
 };
 #endif // MAINWINDOW_H

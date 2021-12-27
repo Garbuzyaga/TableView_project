@@ -1,21 +1,28 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include <QHBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QWidget(parent)
 {
-    ui->setupUi(this);
-
     model = new Model;
-    ui->tableView->setModel(model);
-    ui->label->setText("Correct");
+    view = new QTableView;
+    label = new QLabel;
     connect(model, &Model::checkCell, this, &MainWindow::checkValidity);
+    view->setModel(model);
+    view->setMinimumSize(420, 10);
+    label->setText("Correct");
+    lay = new QHBoxLayout(this);
+    lay->addWidget(view);
+    lay->addWidget(label);
+
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete view;
+    delete model;
+    delete label;
+    delete lay;
 }
 
 
@@ -23,9 +30,9 @@ MainWindow::~MainWindow()
 void MainWindow::checkValidity(bool validation)
 {
     if(validation)
-        ui->label->setText("Correct");
+        label->setText("Correct");
     else
-        ui->label->setText("Incorrect");
+        label->setText("Incorrect");
 
 }
 
